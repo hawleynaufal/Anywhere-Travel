@@ -10,10 +10,10 @@ use Auth;
 
 class PostController extends Controller
 {
-	public function wel()
+	public function welcome()
 	{
 		$loguser = Auth::user();
-		return view('welcome',compact('loguser'));
+		return view('post.welcome',compact('loguser'));
 
 	}
 	public function index()

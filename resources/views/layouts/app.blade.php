@@ -36,32 +36,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="index.html">Home</a></li>                   
-                    @guest
-                    <li><a href="{{ route('login') }}">Login</a></li>
-                    <li><a href="{{ route('register') }}">Register</a></li>
-                    @else
-                    <li><a href="{{route('post.create')}}">Write a blog</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
-
-                        <ul class="dropdown-menu" style="text-transform: capitalize;">
-                            <li>
-                                <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                Logout
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                                </form>
-                            </li>
-                        </ul>
+                    <li class="active"><a href="{{ url('/') }}">Home</a></li>                   
+                    
                     </li>
-                @endguest
             </ul> <!-- /.nav -->
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container -->

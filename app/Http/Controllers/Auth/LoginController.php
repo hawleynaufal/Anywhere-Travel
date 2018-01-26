@@ -20,12 +20,16 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
+        /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/';
+
+        protected $redirectTo = '/';
+
+
+
 
     /**
      * Create a new controller instance.
@@ -36,4 +40,17 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+    
+    protected function redirectTo()
+    {
+        if (\Auth::User()->level == 'admin') {
+            return '/post';
+        }
+        
+    }
+
+
+
 }
