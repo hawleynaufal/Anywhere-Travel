@@ -138,7 +138,7 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li><i class="fa fa-book"></i> <span color="white">Data User</span></a></li>
+        <li><i class="fa fa-book"></i> <span>Data User</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

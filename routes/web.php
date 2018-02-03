@@ -38,7 +38,10 @@ Route::middleware('auth')->group(function(){
 	Route::get('/admin','CostumerController@index')->name('costumer.index');
 	Route::get('/admin/{costumer}/edit','CostumerController@edit')->name('costumer.edit');
 	Route::patch('/admin/{costumer}/edit','CostumerController@update')->name('costumer.update');
-	
+	Route::get('/admin/rutes/create','CostumerController@rutebikin')->name('costumer.rutebikin');
+	Route::post('/admin/rutes/create','CostumerController@rutesetor')->name('costumer.rutesetor');
+
+	Route::get('/booking/pesawat','BookingController@caripesawat')->name('booking.caripesawat');
 
 });
 Route::delete('/admin/{costumer}/delete','CostumerController@destroy')->name('costumer.destroy');

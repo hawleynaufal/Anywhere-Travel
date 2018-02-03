@@ -8,7 +8,7 @@
 		
 		<div class="form-group">
 			<label for="">Name</label>
-			<input type="text" class="form-control" name="name" placeholder="Masukan nama anda...">
+			<input type="text" class="form-control" value="{{Auth::User()->name}}" name="name" placeholder="Masukan nama anda...">
 		</div>
 		
 		<div class="form-group">

@@ -46,7 +46,7 @@ class LoginController extends Controller
     protected function redirectTo()
     {
         if (\Auth::User()->level == 'admin') {
-            return '/post';
+            return '/admin';
         }
         
     }

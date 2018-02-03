@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Requests;
 use App\Costumer;
+use App\Transportation;
+use App\Rute;
 use Auth;
 
  
@@ -12,7 +14,10 @@ class CostumerController extends Controller
 {
 	public function index()
 	{
-		$costumer = \App\Costumer::paginate(5);
+		$search=\Request::get('search');
+
+		$costumer = Costumer::where('name','like','%'.$search.'%')->paginate(2);
+
 		return view('admin.index',compact('costumer'));
 	}	
 	public function welcome()
@@ -34,7 +39,7 @@ class CostumerController extends Controller
     		'user_id' => Auth::id()  
     	]);
 
-    	return redirect()->route('costumer.index');
+    	return redirect()->route('costumer.welcome');
     }
 
    public function edit(Costumer $costumer)
@@ -65,4 +70,24 @@ class CostumerController extends Controller
 
 		return redirect()->route('costumer.index');
 	}
+
+	//RUTES
+    public function rutebikin()
+    {
+    	$transportation = Transportation::all();
+    	return view('admin.create_rutes',compact('transportation'));
+    }
+    public function rutesetor()
+    {
+    	Rute::create([
+    		'depart_at' => request('depart_at'),
+    		'rute_from' => request('rute_from'),
+    		'rute_to' => request('rute_to'),
+    		'price' => request('price'),
+    		'transportation_id' => request('transportation_id'),  
+    	]);
+
+
+    	return redirect()->route('costumer.index');
+    }
 }
