@@ -5,18 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Costumer;
+use Auth;
 
  
 class CostumerController extends Controller
 {
 	public function index()
 	{
-		$costumer = Costumer::all();
+		$costumer = \App\Costumer::paginate(5);
 		return view('admin.index',compact('costumer'));
 	}	
+	public function welcome()
+	{
+		return view('booking.home');
+	}
+	
     public function create()
     {
-    	return view('booking.isidata');
+    	return view('auth.costumer');
     }
     public function store()
     {
@@ -24,7 +30,8 @@ class CostumerController extends Controller
     		'name' => request('name'),
     		'address' => request('address'),
     		'phone' => request('phone'),
-    		'gander' => request('gander')
+    		'gander' => request('gander'),
+    		'user_id' => Auth::id()  
     	]);
 
     	return redirect()->route('costumer.index');
@@ -32,6 +39,7 @@ class CostumerController extends Controller
 
    public function edit(Costumer $costumer)
 	{
+
 		
 		return view('booking.edit',compact('costumer'));
 
