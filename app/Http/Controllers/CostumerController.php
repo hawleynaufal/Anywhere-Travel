@@ -39,7 +39,7 @@ class CostumerController extends Controller
     		'user_id' => Auth::id()  
     	]);
 
-    	return redirect()->route('costumer.welcome');
+    	return redirect()->route('welcome');
     }
 
    public function edit(Costumer $costumer)

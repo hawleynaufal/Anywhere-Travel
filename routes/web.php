@@ -15,7 +15,7 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/','CostumerController@welcome')->name('welcome');
 
 Route::middleware('auth')->group(function(){
@@ -29,21 +29,27 @@ Route::middleware('auth')->group(function(){
 });
 
 Route::Auth();
+Route::middleware('auth')->group(function(){
 Route::get('/costumer','CostumerController@create')->name('costumer.create');
 Route::post('/costumer','CostumerController@store')->name('costumer.store');
+Route::get('/booking/pesawat','BookingController@caripesawat')->name('booking.caripesawat');
+
+});
 
 
 
-Route::middleware('auth')->group(function(){
+
+Route::middleware('admin')->group(function(){
 	Route::get('/admin','CostumerController@index')->name('costumer.index');
 	Route::get('/admin/{costumer}/edit','CostumerController@edit')->name('costumer.edit');
 	Route::patch('/admin/{costumer}/edit','CostumerController@update')->name('costumer.update');
 	Route::get('/admin/rutes/create','CostumerController@rutebikin')->name('costumer.rutebikin');
 	Route::post('/admin/rutes/create','CostumerController@rutesetor')->name('costumer.rutesetor');
+	Route::delete('/admin/{costumer}/delete','CostumerController@destroy')->name('costumer.destroy');
 
-	Route::get('/booking/pesawat','BookingController@caripesawat')->name('booking.caripesawat');
+	
 
 });
-Route::delete('/admin/{costumer}/delete','CostumerController@destroy')->name('costumer.destroy');
+
 
 Route::get('/post/{post}','PostController@show')->where('slug' ,'[\w\d\-\_]+')->name('post.show');
