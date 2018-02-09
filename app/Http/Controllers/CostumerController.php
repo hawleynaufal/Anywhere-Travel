@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Costumer;
 use App\Transportation;
 use App\Rute;
+use App\Reservation;
 use Auth;
 
  
@@ -16,9 +17,9 @@ class CostumerController extends Controller
 	{
 		$search=\Request::get('search');
 
-		$costumer = Costumer::where('name','like','%'.$search.'%')->paginate(2);
+		$costumer = Costumer::where('name','like','%'.$search.'%')->paginate(5);
 
-		return view('admin.index',compact('costumer'));
+		return view('admin.costumer',compact('costumer'));
 	}	
 	public function welcome()
 	{
@@ -72,6 +73,13 @@ class CostumerController extends Controller
 	}
 
 	//RUTES
+	public function rutetampil()
+	{
+		$search=\Request::get('search');
+
+		$rute = Rute::paginate(5);
+		return view('admin.rutes',compact('rute'));
+	}
     public function rutebikin()
     {
     	$transportation = Transportation::all();
@@ -88,6 +96,43 @@ class CostumerController extends Controller
     	]);
 
 
-    	return redirect()->route('costumer.index');
+    	return redirect()->route('admin.rutetampil');
     }
+    public function ruteedit(Rute $rute)
+	{
+
+		
+		return view('booking.edit',compact('rute'));
+
+
+	}
+	public function ruteupdate(Rute $rute)
+	{
+		
+
+		$rute->update([
+			'depart_at' => request('depart_at'),
+    		'rute_from' => request('rute_from'),
+    		'rute_to' => request('rute_to'),
+    		'price' => request('price'),
+    		'transportation_id' => request('transportation_id'),
+		]);
+
+		return redirect()->route('admin.rutetampil');
+	}
+
+	public function rutedestroy(Rute $rute)
+	{
+		$rute->delete();
+
+		return redirect()->route('admin.rutetampil');
+	}
+
+	//RESERVATION
+	public function reservationtampil()
+	{
+
+		$reservation = Reservation::paginate(5);
+		return view('admin.reservation',compact('reservation'));
+	}
 }

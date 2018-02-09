@@ -68,7 +68,7 @@
     <!--[if lt IE 9]>
     <script src="js/respond.min.js"></script>
 <![endif]-->
-
+@yield('css')
 </head>
 <body>
     <div id="fh5co-wrapper">
@@ -78,7 +78,7 @@
                 <div class="container">
                     <div class="nav-header">
                         <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-                        <h1 id="fh5co-logo"><a href="index.html"><i class="icon-airplane"></i>AnyWhere Travel</a></h1>
+                        <h1 id="fh5co-logo"><a href="{{url('/')}}"><i class="icon-airplane"></i>AnyWhere Travel</a></h1>
                         <!-- START #fh5co-menu-wrap -->
                         <nav id="fh5co-menu-wrap" role="navigation">
                             <ul class="sf-menu" id="fh5co-primary-menu">
@@ -89,12 +89,12 @@
                                     <li><a href="{{ url('/login') }}">Login</a></li>
                                     <li><a href="{{ url('/register') }}">Register</a></li>
                                     @else
-                                    <li class="dropdown">
+                                    <li class="dropdown" >
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                             {{ Auth::user()->name }} 
                                         </a>
         
-                                        <ul class="dropdown-menu" role="menu">
+                                        <ul class="dropdown-menu" role="menu" >
                                             <li>
                                                 <a href="{{ url('/logout') }}"
                                                 onclick="event.preventDefault();

@@ -15,15 +15,14 @@
         {
             Schema::create('costumers', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('user_id')->unsigned();
                 $table->string('name');
                 $table->string('address');
                 $table->string('phone');
                 $table->enum('gender', ['Pria','Wanita']);
+                
                 $table->timestamps();
-                $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
+
+                     
             });
         }
 

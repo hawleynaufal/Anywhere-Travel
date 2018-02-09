@@ -154,8 +154,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header ">
       <h1 style="display: inline-block;">
-        Rute Pesawat
-        <small> {{$rute->count('id')}} </small>
+        Reservation
+        <small> {{$reservation->count('id')}} </small>
       </h1>
       <a href="{{url('/admin/rutes/create')}}">
         <button class="btn btn-primary" style="float: right;">Create Rutes</button>
@@ -187,29 +187,35 @@
                 <table class="table table-bordered">
                   <tr>
                     <th style="width: 10px">No</th>
-                    <th>Tanggal</th>
-                    <th>Dari</th>
-                    <th>Menuju</th>
-                    <th>Harga</th>
-                    <th>Maskapai</th>
+                    <th>Reservation Code</th>
+                    <th>Reservation At</th>
+                    <th>Reservation Date</th>
+                    <th>Seat Code</th>
+                    <th>Depart At</th>
+                    <th>Price</th>
+                    <th>Costumer Id</th>
+                    <th>Rute Id</th>
                     <th>Action</th>
                   </tr>
                   <?php $no=1; ?>
-                  @foreach($rute as $rutes)
+                  @foreach($reservation as $reservations)
                   <tr>
                     <td>{{$no++}}</td>
-                    <td>{{$rutes->depart_at}}</td>
-                    <td>{{$rutes->rute_from}}</td>
-                    <td>{{$rutes->rute_to}}</td>
-                    <td>Rp. {{$rutes->price}}</td>
-                    <td>{{$rutes->transportation->description}}</td>
+                    <td>{{$reservations->reservation_code}}</td>
+                    <td>{{$reservations->reservation_at}}</td>
+                    <td>{{$reservations->reservation_date}}</td>
+                    <td>{{$reservations->seat_code}}</td>
+                    <td>{{$reservations->depart_at}}</td>
+                    <td>Rp. {{$reservations->price}}</td>
+                    <td>{{$reservations->costumer_id}}</td>
+                    <td>{{$reservations->rute_id}}</td>
                     <td>
-                      <form action="{{route('admin.rutedestroy',$rutes)}}" method="post" style="display: inline;">
+                      <form action="{{route('admin.rutedestroy',$reservations)}}" method="post" style="display: inline;">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
                         <button type="submit" class="btn btn-danger btn-xs">Hapus</button>
                       </form>  
-                      <a href="{{route('admin.ruteedit',$rutes)}}" style="display: inline;">
+                      <a href="{{route('admin.ruteedit',$reservations)}}" style="display: inline;">
                         <button type="submit" class="btn btn-primary btn-xs">Edit</button>
                       </a>
                     </td>
@@ -219,20 +225,20 @@
                 </table>
               </div>
               <div class="box-footer clearfix " style="border-top:0px;text-align: center;"> 
-               {{$rute->links()}}
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-      <!-- /.row (main row) -->
+               {{$reservation->links()}}
+             </div>
+           </div>
+         </div>
+       </section>
+     </div>
+     <!-- /.row (main row) -->
 
-    </section>
-    <!-- /.content -->
-  </div>
+   </section>
+   <!-- /.content -->
+ </div>
 
-  <!-- Control Sidebar -->
-  <!-- /.control-sidebar -->
+ <!-- Control Sidebar -->
+ <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
    immediately after the control sidebar -->
    <div class="control-sidebar-bg"></div>

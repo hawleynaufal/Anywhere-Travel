@@ -16,15 +16,18 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('reservation_code');
-            $table->string('reservation_at');
-            $table->string('reservation_date');
+            $table->timestamp('reservation_date');
             $table->string('seat_code');
             $table->string('depart_at');
             $table->string('price');
+            $table->integer('user_id')->unsigned();
             $table->integer('costumer_id')->unsigned();
             $table->integer('rute_id')->unsigned();
-            $table->timestamps();
+            
 
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
             $table->foreign('costumer_id')
                 ->references('id')->on('costumers')
                 ->onDelete('cascade');

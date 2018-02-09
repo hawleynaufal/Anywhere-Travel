@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
 	
-	<form action="{{ route('costumer.rutesetor')}}" method="post">
+	<form action="{{ route('admin.rutesetor')}}" method="post">
 		{{ csrf_field() }}
 
 		<div class="form-group">

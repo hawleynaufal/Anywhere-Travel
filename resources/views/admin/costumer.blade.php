@@ -154,13 +154,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header ">
       <h1 style="display: inline-block;">
-        Rute Pesawat
-        <small> {{$rute->count('id')}} </small>
+        Customer 
+        <small> {{$costumer->count('id')}} </small>
       </h1>
-      <a href="{{url('/admin/rutes/create')}}">
-        <button class="btn btn-primary" style="float: right;">Create Rutes</button>
-      </a>
-      <form action="{{ route('admin.rutetampil') }}" class="form-inline" style="display: inline-block;float: right; padding-right: 40px;" method="get" >                
+      <form action="{{ route('admin.costumer') }}" class="form-inline" style="display: inline-block;float: right; padding-right: 40px;" method="get" >                
         <div class="form-group">
           <input type="text" class="form-control" name="search" value="">
         </div>
@@ -187,39 +184,40 @@
                 <table class="table table-bordered">
                   <tr>
                     <th style="width: 10px">No</th>
-                    <th>Tanggal</th>
-                    <th>Dari</th>
-                    <th>Menuju</th>
-                    <th>Harga</th>
-                    <th>Maskapai</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Gender</th>
                     <th>Action</th>
                   </tr>
                   <?php $no=1; ?>
-                  @foreach($rute as $rutes)
+                  @foreach($costumer as $costumers)
                   <tr>
                     <td>{{$no++}}</td>
-                    <td>{{$rutes->depart_at}}</td>
-                    <td>{{$rutes->rute_from}}</td>
-                    <td>{{$rutes->rute_to}}</td>
-                    <td>Rp. {{$rutes->price}}</td>
-                    <td>{{$rutes->transportation->description}}</td>
+                    <td>{{$costumers->name}}</td>
+                    <td>{{$costumers->address}}</td>
+                    <td>{{$costumers->phone}}</td>
+                    <td>{{$costumers->gender}}</td>
                     <td>
-                      <form action="{{route('admin.rutedestroy',$rutes)}}" method="post" style="display: inline;">
+                      <form action="{{route('costumer.destroy',$costumers)}}" method="post" style="
+                      display: inline;">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
-                        <button type="submit" class="btn btn-danger btn-xs">Hapus</button>
+                        <button type="submit" class="btn btn-danger btn-xs">hapus</button>
                       </form>  
-                      <a href="{{route('admin.ruteedit',$rutes)}}" style="display: inline;">
-                        <button type="submit" class="btn btn-primary btn-xs">Edit</button>
+                      <a href="{{route('costumer.edit',$costumers)}}" style="
+                      display: inline;">
+                        <button type="submit" class="btn btn-primary btn-xs">edit</button>
                       </a>
                     </td>
-                    
+                    <td>
+                    </td>
                   </tr>
                   @endforeach
                 </table>
               </div>
               <div class="box-footer clearfix " style="border-top:0px;text-align: center;"> 
-               {{$rute->links()}}
+                  {{$costumer->links()}}
               </div>
             </div>
           </div>

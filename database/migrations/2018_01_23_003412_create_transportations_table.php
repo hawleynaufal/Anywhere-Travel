@@ -18,6 +18,7 @@ class CreateTransportationsTable extends Migration
             $table->string('code');
             $table->string('description');
             $table->integer('seat_qty');
+            $table->timestamps();
         });
     }
 

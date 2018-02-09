@@ -81,20 +81,8 @@
 													<div class="col-xxs-12 col-xs-6 mt">
 														<section>
 															<label for="class">Adult:</label>
-															<select class="cs-select cs-skin-border">
-																<option value="" disabled selected>1</option>
-																<option value="1">1</option>
-																<option value="2">2</option>
-																<option value="3">3</option>
-																<option value="4">4</option>
-															</select>
-														</section>
-													</div>
-													<div class="col-xxs-12 col-xs-6 mt">
-														<section>
-															<label for="class">Children:</label>
-															<select class="cs-select cs-skin-border">
-																<option value="" disabled selected>1</option>
+															<select name="seat" class="cs-select cs-skin-border">
+																<option value="1" disabled selected>1</option>
 																<option value="1">1</option>
 																<option value="2">2</option>
 																<option value="3">3</option>
@@ -240,9 +228,6 @@
 			</div>
 		</div>
 	</footer>
-
-
-
 </div>
 <!-- END fh5co-page -->
 

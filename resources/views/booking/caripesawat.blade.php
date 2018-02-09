@@ -14,7 +14,7 @@
 					{{$rutes->rute_from}} - {{$rutes->rute_to}}<br>
 					{{$rutes->price}}<br>
 					
-					<button class="btn btn-primary">Select</button><br>
+					<a href="{{route('booking.detailrute',$rutes)}}?seat={{$_GET['seat']}}"><button class="btn btn-primary">Select</button></a><br>
 					<hr>
 				
 				@endforeach
