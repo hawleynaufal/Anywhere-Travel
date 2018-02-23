@@ -22,7 +22,7 @@ class CreateReservationsTable extends Migration
             $table->string('price');
             $table->integer('user_id')->unsigned();
             $table->integer('costumer_id')->unsigned();
-            $table->integer('rute_id')->unsigned();
+            
             
 
             $table->foreign('user_id')
@@ -31,9 +31,7 @@ class CreateReservationsTable extends Migration
             $table->foreign('costumer_id')
                 ->references('id')->on('costumers')
                 ->onDelete('cascade');
-            $table->foreign('rute_id')
-                ->references('id')->on('rutes')
-                ->onDelete('cascade');
+            
         });
     }
 

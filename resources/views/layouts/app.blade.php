@@ -41,26 +41,32 @@
 <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 <link rel="shortcut icon" href="favicon.ico">
 <!--
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'> -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'> -->
 
-<!-- Animate.css -->
-<link rel="stylesheet" href="{{ asset('css/animate.css')}}">
-<!-- Icomoon Icon Fonts-->
-<link rel="stylesheet" href="{{ asset('css/icomoon.css')}}">
-<!-- Bootstrap  -->
-<link rel="stylesheet" href="{{ asset('css/bootstrap.css')}}">
-<!-- Superfish -->
-<link rel="stylesheet" href="{{ asset('css/superfish.css')}}">
-<!-- Magnific Popup -->
-<link rel="stylesheet" href="{{ asset('css/magnific-popup.css')}}">
-<!-- Date Picker -->
-<link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.min.css')}}">
-<!-- CS Select -->
-<link rel="stylesheet" href="{{ asset('css/cs-select.css')}}">
-<link rel="stylesheet" href="{{ asset('css/cs-skin-border.css')}}">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="{{ asset('css/animate.css')}}">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="{{ asset('css/icomoon.css')}}">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css')}}">
+    <!-- Superfish -->
+    <link rel="stylesheet" href="{{ asset('css/superfish.css')}}">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="{{ asset('css/magnific-popup.css')}}">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.min.css')}}">
+    <!-- CS Select -->
+    <link rel="stylesheet" href="{{ asset('css/cs-select.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/cs-skin-border.css')}}">
 
-<link rel="stylesheet" href="{{ asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/style.css')}}">
 
+    <style>
+    ::selection {
+        color: #fcfcfc;
+        background: #2c9c7c;
+    }
+</style>
 
 <!-- Modernizr JS -->
 <script src="{{ asset('js/modernizr-2.6.2.min.js')}}"></script>
@@ -78,7 +84,7 @@
                 <div class="container">
                     <div class="nav-header">
                         <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-                        <h1 id="fh5co-logo"><a href="{{url('/')}}"><i class="icon-airplane"></i>AnyWhere Travel</a></h1>
+                        <h1 id="fh5co-logo" style="color:"><a href="{{url('/')}}" style="font-family: raleway;"><i class="icon-airplane"></i>AnyWhere Travel</a></h1>
                         <!-- START #fh5co-menu-wrap -->
                         <nav id="fh5co-menu-wrap" role="navigation">
                             <ul class="sf-menu" id="fh5co-primary-menu">
@@ -91,9 +97,11 @@
                                     @else
                                     <li class="dropdown" >
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                            {{ Auth::user()->name }} 
+                                            <div style="text-transform: capitalize;">
+                                                {{ Auth::user()->name }} 
+                                            </div>
                                         </a>
-        
+                                        
                                         <ul class="dropdown-menu" role="menu" >
                                             <li>
                                                 <a href="{{ url('/logout') }}"
@@ -120,6 +128,7 @@
 
 @include('layouts.partials._alerts')
 @yield('content')
+@yield('js')
 <script src="{{ asset('js/jquery.min.js')}}"></script>
 <!-- jQuery Easing -->
 <script src="{{ asset('js/jquery.easing.1.3.js')}}"></script>

@@ -143,7 +143,7 @@
         <li class="header">MENU</li>
         <li><a href="{{route('admin.rutetampil')}}"><i class="fa fa-book"></i> <span>RUTES</span></a></li>
         <li><a href="{{route('admin.costumer')}}"><i class="fa fa-book"></i> <span>CUSTOMER</span></a></li>
-        <li><a href="{{route('admin.costumer')}}"><i class="fa fa-book"></i> <span>RESERVATION</span></a></li>
+        <li><a href="{{route('admin.reservation')}}"><i class="fa fa-book"></i> <span>RESERVATION</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -195,7 +195,8 @@
                     <th>Price</th>
                     <th>Costumer Id</th>
                     <th>Rute Id</th>
-                    <th>Action</th>
+                    <th>Status</th>
+
                   </tr>
                   <?php $no=1; ?>
                   @foreach($reservation as $reservations)
@@ -208,7 +209,7 @@
                     <td>{{$reservations->depart_at}}</td>
                     <td>Rp. {{$reservations->price}}</td>
                     <td>{{$reservations->costumer_id}}</td>
-                    <td>{{$reservations->rute_id}}</td>
+                    <td>{{$reservations->costumer->rute_id}}</td>
                     <td>
                       <form action="{{route('admin.rutedestroy',$reservations)}}" method="post" style="display: inline;">
                         {{csrf_field()}}

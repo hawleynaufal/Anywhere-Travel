@@ -40,7 +40,7 @@
 
 		<div class="form-group">
 			<label for="date-start">Depart:</label><br>
-			<input type="text" class="form-control" id="date-start" data-date-format="yyyy-mm-dd"
+			<input type="text" class="form-control" id="date-start" data-date-format="yyyy-mm-dd" data-date-start-date="+1d"
 			placeholder="yyyy-mm-dd"
 			name="depart_at" />
 		</div>

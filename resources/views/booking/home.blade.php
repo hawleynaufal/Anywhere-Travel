@@ -71,8 +71,8 @@
 													<div class="col-xxs-12 col-xs-12 mt alternate">
 														<div class="input-field">
 															<label for="date-start">Depart:</label>
-															<input type="text" class="form-control" id="date-start" data-date-format="yyyy-mm-dd"
-															placeholder="yyyy-mm-dd"
+															<input type="text" class="form-control" id="date-start" data-date-start-date="+1d" data-date-format="yyyy-mm-dd"
+
 															name="depart_at" />
 														</div>
 													</div>
@@ -82,8 +82,7 @@
 														<section>
 															<label for="class">Adult:</label>
 															<select name="seat" class="cs-select cs-skin-border">
-																<option value="1" disabled selected>1</option>
-																<option value="1">1</option>
+																<option value="1" selected>1</option>
 																<option value="2">2</option>
 																<option value="3">3</option>
 																<option value="4">4</option>
@@ -103,10 +102,12 @@
 							</div>
 							<div class="desc2 animate-box">
 								<div class="col-sm-7 col-sm-push-1 col-md-7 col-md-push-1">
-
-									<h2>Travel Termurah Dijamannya</h2>
-									<h3>hahahha</h3>
-									<span class="price">$599</span>
+									<div style="font-size: 60px;font-family: raleway;"> 
+									Anywhere you go<br>
+									Go with us ~
+									</div>
+									
+									
 									<!-- <p><a class="btn btn-primary btn-lg" href="#">Get Started</a></p> -->
 								</div>
 							</div>
@@ -117,48 +118,7 @@
 		</div>
 
 	</div>
-	<div id="fh5co-testimonial" style="background-image:url(images/img_bg_1.jpg);">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Happy Clients</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="box-testimony animate-box">
-						<blockquote>
-							<span class="quote"><span><i class="icon-quotes-right"></i></span></span>
-							<p>&ldquo;This App is too good for me. Design of this app is easy to see&rdquo;</p>
-						</blockquote>
-						<p class="author">Naufal Muhammad <span class="subtext">CEO ANYWHERE TRAVEL</span></p>
-					</div>
-
-				</div>
-				<div class="col-md-4">
-					<div class="box-testimony animate-box">
-						<blockquote>
-							<span class="quote"><span><i class="icon-quotes-right"></i></span></span>
-							<p>&ldquo;Dont speak Indonesian, I dont know&rdquo;</p>
-						</blockquote>
-						<p class="author">Yosep Sukirman <span class="subtext">Kang Becak</span></p>
-					</div>
-
-
-				</div>
-				<div class="col-md-4">
-					<div class="box-testimony animate-box">
-						<blockquote>
-							<span class="quote"><span><i class="icon-quotes-right"></i></span></span>
-							<p>&ldquo;Ariq lebih milih mba monde dari pada aida , trus ariq suka sama aida tapi aida ga suka&rdquo;</p>
-						</blockquote>
-						<p class="author">Milania Daffa   <span class="subtext">Teteh Gosip</span></p>
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
+	
 	<footer>
 		<div id="footer">
 			<div class="container">

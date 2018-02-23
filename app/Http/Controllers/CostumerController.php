@@ -98,10 +98,10 @@ class CostumerController extends Controller
 
     	return redirect()->route('admin.rutetampil');
     }
-    public function ruteedit(Rute $rute)
+    public function ruteedit($id)
 	{
+		$rute = Rute::findOrFail($id);
 
-		
 		return view('booking.edit',compact('rute'));
 
 
@@ -123,6 +123,7 @@ class CostumerController extends Controller
 
 	public function rutedestroy(Rute $rute)
 	{
+
 		$rute->delete();
 
 		return redirect()->route('admin.rutetampil');

@@ -143,7 +143,7 @@
         <li class="header">MENU</li>
         <li><a href="{{route('admin.rutetampil')}}"><i class="fa fa-book"></i> <span>RUTES</span></a></li>
         <li><a href="{{route('admin.costumer')}}"><i class="fa fa-book"></i> <span>CUSTOMER</span></a></li>
-        <li><a href="{{route('admin.costumer')}}"><i class="fa fa-book"></i> <span>RESERVATION</span></a></li>
+        <li><a href="{{route('admin.reservation')}}"><i class="fa fa-book"></i> <span>RESERVATION</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
