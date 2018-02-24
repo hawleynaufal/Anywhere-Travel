@@ -26,7 +26,7 @@
 						@endforeach
 						
 						<br>	
-						<form action="{{route('storersrv',$id)}}?name={{$_GET['name']}}&token={{$_GET['token']}}" method="post">
+						<form action="{{ url()->current()}}/payment?token={{$_GET['token']}}" method="post">
 							
 							
 

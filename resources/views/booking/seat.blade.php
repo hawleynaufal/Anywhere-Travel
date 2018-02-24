@@ -32,7 +32,11 @@
 										<span>{{$costumers->name}}</span>
 									</td>
 									<td>
-										<input id="i{{$i}}" type="text">
+										<form action="" method="post">
+										<input id="i{{$i}}" name="i_{{$i}}" type="text" >
+										{{ csrf_field() }}
+							
+										
 									</td>
 								</tr>
 								
@@ -43,24 +47,32 @@
 							</table>
 						</div>
 
-						<div class="seat">
-							@for (	$i = 1; 	$i < 46; 	$i++)
-							@if ($costumer->kursi == $i)
-							<div onclick="sget(this.id)" id="{{$i}}" class="seat-id"><p>{{$i}}</p></div>
+
+						
+						
+							 <br>
+							@for (	$i = 1; 	$i <= $costumers->rute->transportation->seat_qty ; 	$i++)
+
+							@if (in_array($i,$kursi_pesan))	
+							<div onclick="sget(this.id)" id="{{$i}}"  class="seat-id" style="background-color: black;"><p>{{$i}}</p></div>
 							@else
 							<div onclick="sget(this.id)" id="{{$i}}" class="seat-id"><p>{{$i}}</p></div>
 							@endif
-							@endfor 
-							
-							
-						</div>
-						
+
+							@endfor
+							<input  type="submit" class="btn btn-primary" value="LANJUTKAN"> 
+						</form>
+
+
+
 					</div>
+
 				</div>
 			</div>
-
 		</div>
+
 	</div>
+</div>
 </div>
 @endsection
 @section('js')
@@ -86,26 +98,28 @@
 
 				if($('#i'+this.pn(this.p)).val() == ''){
 					$('#' + id).addClass("seat-selected");
-                         // console.log(this.pn(this.p));
-                         $('#i'+this.pn(this.p)).val(id);
-                         $('#'+id).addClass('seat-for-'+this.p);
-                     }
+					
+// console.log(this.pn(this.p));
+$('#i'+this.pn(this.p)).val(id);
+
+$('#'+id).addClass('seat-for-'+this.p);
+}
 
 
-                 } else {
-                 	cSeat = $('#' + id).attr('class');
-                 	cSeatoc = cSeat.replace('seat-id seat-selected seat-for-p','');
-                 	$('#' + id).removeClass("seat-selected");
-                 	$('#'+id).removeClass(cSeat.replace('seat-id ',''));
-                 	$('#i'+cSeatoc).val(''); 
+} else {
+	cSeat = $('#' + id).attr('class');
+	cSeatoc = cSeat.replace('seat-id seat-selected seat-for-p','');
+	$('#' + id).removeClass("seat-selected");
+	$('#'+id).removeClass(cSeat.replace('seat-id ',''));
+	$('#i'+cSeatoc).val(''); 
 
 
-                 }
-                //    console.log($('#'+id).attr('class'));
-            }
-        }
+}
+//    console.log($('#'+id).attr('class'));
+}
+}
 
 
 
-    </script>
-    @endsection
+</script>
+@endsection

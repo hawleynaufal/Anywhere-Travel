@@ -92,7 +92,11 @@
 												</div>
 
 												<div class="col-xs-12">
-													<input type="submit" class="btn btn-primary btn-block mt" value="Search Flight">
+
+													{{-- <input type="submit" class="btn btn-primary btn-block mt" value="Search Flight"> --}}
+													<button class="btn btn-primary btn-block mt" type="submit">
+														<i class="fa fa-search"></i> Cari
+													</button>
 												</div>
 											</div>
 										</form>

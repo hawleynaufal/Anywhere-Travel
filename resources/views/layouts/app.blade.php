@@ -41,8 +41,10 @@
 <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 <link rel="shortcut icon" href="favicon.ico">
 <!--
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'> -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' 
+    rel='stylesheet' type='text/css'> -->
 
+    <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">
     <!-- Animate.css -->
     <link rel="stylesheet" href="{{ asset('css/animate.css')}}">
     <!-- Icomoon Icon Fonts-->
@@ -66,6 +68,9 @@
         color: #fcfcfc;
         background: #2c9c7c;
     }
+    label{
+        font-weight: normal!important;;    
+    }
 </style>
 
 <!-- Modernizr JS -->
@@ -82,12 +87,13 @@
 
             <header id="fh5co-header-section" class="sticky-banner">
                 <div class="container">
-                    <div class="nav-header">
+                    <div class="nav-header" style="padding-top: 20px;padding-bottom: 20px">
                         <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-                        <h1 id="fh5co-logo" style="color:"><a href="{{url('/')}}" style="font-family: raleway;"><i class="icon-airplane"></i>AnyWhere Travel</a></h1>
+                        <img src="{{asset('images/logo-2.png')}}" height="50px" alt="" >
+                        {{-- <h1 id="fh5co-logo" style="color:"><a href="{{url('/')}}" style="font-family: raleway;"><i class="icon-airplane"></i>AnyWhere Travel</a></h1> --}}
                         <!-- START #fh5co-menu-wrap -->
-                        <nav id="fh5co-menu-wrap" role="navigation">
-                            <ul class="sf-menu" id="fh5co-primary-menu">
+                        <nav id="fh5co-menu-wrap" role="navigation" style="margin: 0px!important;padding-top: -5px;">
+                            <ul class="sf-menu" id="fh5co-primary-menu" style="">
                                 <li class="active"><a href="{{url('/')}}">Home</a></li>
 
                                 <li>

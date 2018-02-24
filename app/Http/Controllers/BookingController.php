@@ -63,20 +63,41 @@ class BookingController extends Controller
     }
     public function seat($id)
     {
-        $kursi = Costumer::table('costumers')
-            ->join('rutes', 'costumers.rute_id', '=', 'rutes.id')
-            ->select('users.*', 'contacts.phone', 'orders.price')
+        $kursi = Costumer::join('rutes', 'costumers.rute_id', '=', 'rutes.id')
+            ->where('rute_id',$id)
+            ->select('costumers.kursi')
             ->get();
+        $kursi_pesan = array();
 
-        $this->db->select('passengers.seat');
-        $this->db->from('rute');
-        $this->db->join('reservation','rute.id=reservation.rute_id');
-        $this->db->join('passengers','reservation.id=passengers.reservation_id');
-        $this->db->where(['rute.id'=>$id]);
-        return $this->db->get()->result_array();
+       foreach($kursi as $seat){ 
+            $kursi_pesan[] = $seat->kursi;
+        };
 
-        $costumer = Costumer::where('token',$_GET['token'])->get();
-        return view('booking.seat',compact('costumer'));
+
+        $costumer =  Costumer::where('token',$_GET['token'])->get();
+       
+        return view('booking.seat',compact('costumer','kursi_pesan'));
+    }
+    public function seatstore($id, Request $request)
+    {   $token = $request->token ;
+        $customer = Costumer::where('rute_id',$id)->where('token',$token)->get();
+        $custom = Costumer::where('rute_id',$id)->where('token',$token)->first();
+
+        $cuy = array();
+        
+     
+           
+        $j = 0;
+       for ($i=1; $i <= count($customer) ; $i++) { 
+           # code...
+            $customer[$j]->update([
+                'kursi' => $request->input('i_'.$i),
+            ]);
+            
+            $j++;
+       }
+       return redirect('booking/'.$id.'/reservation?name='.$custom->name.'&token='.$token);
+
     }
     
 
@@ -90,11 +111,12 @@ class BookingController extends Controller
         
         return view('booking.reservation',compact('costumer','id'));
     }
+   
     public function storersrv(Request $request,$id)
     {       
         $token = $_GET['token'];
         $customer = Costumer::where('token',$token)->get();
-        $count = 0;
+
         foreach($customer as $cus){
              Reservation::create([
                 'reservation_code' => $request->reservation_code,
@@ -103,20 +125,21 @@ class BookingController extends Controller
                 'depart_at' => $request->depart_at,
                 'price' => $request->price,
                 'user_id' => $request->user_id,
-                'costumer_id' => $request->costumer_id[$count],
+                'costumer_id' => $cus->id,
             ]);
-                $count++;
+               
          }
        
-            $reservasi = Reservation::where('reservation_code', $request->reservation_code)->get();
+            $reservasi = Reservation::where('reservation_code', $request->reservation_code)->first();
 
 
-     return view('booking.payment?rsv='.$reservasi->reservation_code,compact('reservasi'));
- }
- public function payment(Request $request,$id){
-    $reservation = Reservation::where('reservation_code',$request->reservation_code)->get();
+     return view('booking.payment',compact('reservasi'));
+     }
+
+       public function payment(Request $request,$id){
+        $reservation = Reservation::where('reservation_code',$request->reservation_code)->get();
 
     return view('booking.payment',compact('reservation'));
-}
+    }
 
 }

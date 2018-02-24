@@ -41,9 +41,12 @@ Route::get('/booking/{rute}','BookingController@detailrute')->name('booking.deta
 Route::get('/booking/{id}/isidata','BookingController@createcus')->name('booking.createcus');
 Route::post('/booking/{id}/isidata','BookingController@storecus')->name('booking.storecus');
 Route::get('/booking/{id}/seat','BookingController@seat')->name('booking.seat');
+Route::post('/booking/{id}/seat','BookingController@seatstore')->name('booking.seat');
 Route::get('/booking/{id}/reservation','BookingController@reservation')->name('booking.reservation');
-Route::post('/booking/{id}/reservation','BookingController@storersrv')->name('storersrv');
+
 Route::get('/booking/{id}/reservation/payment','BookingController@payment')->name('booking.payment');
+Route::post('/booking/{id}/reservation/payment','BookingController@storersrv')->name('booking.payment');
+
 });
 
 
