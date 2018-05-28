@@ -1,79 +1,130 @@
 @extends('layouts.app')
 @section('content')
-<div class="fh5co-hero">
-	<div class="fh5co-overlay" 	style="position: fixed !important;background-repeat: no-repeat;"></div>
-	<div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url({{asset('images/cover_bg_3.jpg')}});background-repeat: no-repeat;height: none; ">
-		<div class="container" style="padding-top: 80px;">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2" style="background-color: #fff;z-index: 2;padding-top: 20px;">
+<div style="background-color: #e6eaed!important;">	
+	<div class="row" style="padding-top: 30px;">
+		<div class="container">
 
+			<div class="col-md-7 col-md-offset-1" >
 
-					<div class="tab-content">
-						@foreach ($costumer as $costumers)
+				<div style="">	
+					<div role="tabpanel" class="tab-pane active" id="flights">
+						<div class="isi-top" style="border-radius: 4px;font-size: 24px;">Pilih Kursi</div>
 
-						{{$costumers->name}}
-						@endforeach
-						<div class="customer-name">
-							<table>
-								@php
-								$i = 0
-								@endphp
+						
+						<div style="background-color: #fff;box-shadow: rgba(27, 27, 27, 0.2) 0px 2px 4px 0px;border-radius: 4px;">
+							<div style="padding-right: 30px;padding-left: 30px;padding-top: 20px;padding-bottom: 20px;margin-top: 10px;">		
+
 								
-								@foreach ($costumer as $costumers)	
-								@php
-								$i++
-								@endphp
-								
-								<tr>
-									<td>
-										<div onclick="pget(this.id)" id="p{{$i}}" class="customer-color id-1"></div>
-									</td>
-									<td>
-										<span>{{$costumers->name}}</span>
-									</td>
-									<td>
-										<form action="" method="post">
-										<input id="i{{$i}}" name="i_{{$i}}" type="text" >
-										{{ csrf_field() }}
-							
+								<div class="customer-name">
+									<table>
+										@php
+										$i = 0
+										@endphp
+
+										@foreach ($costumer as $costumers)	
+										@php
+										$i++
+										@endphp
 										
-									</td>
-								</tr>
-								
-								@endforeach
-								
-								
-								
-							</table>
+										<tr>
+											<td width="30px">
+												<div onclick="pget(this.id)" id="p{{$i}}" class="customer-color id-1"></div>
+											</td>
+											<td width="160px">
+												<label>{{$costumers->name}}</label>
+											</td>
+											<td>
+												<form action="" method="post">
+													<input id="i{{$i}}" name="i_{{$i}}" type="text" class="form-control" >
+													{{ csrf_field() }}
+
+												</td>
+											</tr>
+											<tr>
+												<td style="font-size: 5px;">&nbsp</td>
+											</tr>
+											
+
+											
+											@endforeach
+
+										</table>
+									</div>
+									<div class="row" style="padding-top: 20px; padding-bottom: 10px;">
+										<div class="col-md-12 text-center">
+											@for (	$i = 1; 	$i <= $costumers->rute->transportation->seat_qty ; 	$i++)
+
+											@if (in_array($i,$kursi_pesan))	
+											<div onclick="sget(this.id)" id="{{$i}}"  class="seat-id seat-notavailabe" disabled>{{$i}}</div>
+											@else
+											<div onclick="sget(this.id)" id="{{$i}}" class="seat-id">{{$i}}</div>
+											@endif
+
+											@endfor
+										</div>
+									</div>
+
+
+
+									
+
+
+
+								</div>
+								<div class="form-group">
+									<input type="submit" class="btn btn-primary" value="Lanjutkan" style="margin-top: 10px; float: right;padding-left: 20px;padding-right: 20px; margin-bottom: 50px;"">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3  " style="font-size: 14px;">
+				<div style="box-shadow: rgba(27, 27, 27, 0.2) 0px 2px 4px 0px;">
+					<div class="isi-top">	
+						Detail Perjalanan	
+					</div>
+					<div class="isi-bot" >	
+						<div class="row">
+
+							<div class="col-md-6 text-center" style="padding-bottom: 8px;font-size: 16px;">
+								<b>{{date('d m Y', strtotime($costumers->rute->depart_at))}} </b>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 text-center">
+								<img src="{{ asset('images/'.$costumers->rute->transportation->image)}}" width="70" alt=""><br>
+								( {{$costumers->rute->transportation->description}} )
+							</div>	
+							<div class="col-md-6 text-center">
+								{{$costumers->rute->rute_to}} <br><i class="fa fa-arrows-v"></i><br>
+								{{$costumers->rute->rute_from}}
+							</div>
 						</div>
 
 
-						
-						
-							 <br>
-							@for (	$i = 1; 	$i <= $costumers->rute->transportation->seat_qty ; 	$i++)
-
-							@if (in_array($i,$kursi_pesan))	
-							<div onclick="sget(this.id)" id="{{$i}}"  class="seat-id" style="background-color: black;"><p>{{$i}}</p></div>
-							@else
-							<div onclick="sget(this.id)" id="{{$i}}" class="seat-id"><p>{{$i}}</p></div>
-							@endif
-
-							@endfor
-							<input  type="submit" class="btn btn-primary" value="LANJUTKAN"> 
-						</form>
-
-
-
+					</div>	
+				</div>
+				<div style="box-shadow: rgba(27, 27, 27, 0.2) 0px 2px 4px 0px;margin-top: 30px;">
+					<div class="isi-top">	
+						Detail Harga
 					</div>
 
+					<div class="isi-bot-1" >	
+						<div style="float: left;">{{$costumers->rute->transportation->description}}</div><div style="float: right">Rp {{number_format($costumers->rute->price)}}	</div>  <br>
+						<div style="float: left;">Jumlah Pesan</div><div style="float: right;">{{$_GET['seat']}}</div> <br>	
+					</div>
+					<div class="isi-bot-2">	
+						<div style="float: left;">Total Harga</div><div style="float: right;">Rp {{number_format($costumers->rute->price * $_GET['seat'])}}</div><br>	
+					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
-</div>
+
+
 @endsection
 @section('js')
 <script>
@@ -98,7 +149,7 @@
 
 				if($('#i'+this.pn(this.p)).val() == ''){
 					$('#' + id).addClass("seat-selected");
-					
+
 // console.log(this.pn(this.p));
 $('#i'+this.pn(this.p)).val(id);
 

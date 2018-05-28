@@ -8,6 +8,7 @@ use App\Rute;
 use App\Auth;
 use App\Costumer;
 use App\Transportation;
+use Image;
 
 class BookingController extends Controller
 {
@@ -56,26 +57,27 @@ class BookingController extends Controller
             ]);
         }
         $token = $request->token ; 
+        $seat=$request->seat;
         $customer = Costumer::where('rute_id',$id)->where('token',$token)->first();
         // return redirect()->route('booking.reservation',$id);
-        return redirect('booking/'.$id.'/seat?name='.$customer->name.'&token='.$token);
+        return redirect('booking/'.$id.'/seat?name='.$customer->name.'&token='.$token.'&seat='.$seat);
         
     }
     public function seat($id)
     {
         $kursi = Costumer::join('rutes', 'costumers.rute_id', '=', 'rutes.id')
-            ->where('rute_id',$id)
-            ->select('costumers.kursi')
-            ->get();
+        ->where('rute_id',$id)
+        ->select('costumers.kursi')
+        ->get();
         $kursi_pesan = array();
 
-       foreach($kursi as $seat){ 
+        foreach($kursi as $seat){ 
             $kursi_pesan[] = $seat->kursi;
         };
 
 
         $costumer =  Costumer::where('token',$_GET['token'])->get();
-       
+
         return view('booking.seat',compact('costumer','kursi_pesan'));
     }
     public function seatstore($id, Request $request)
@@ -85,18 +87,19 @@ class BookingController extends Controller
 
         $cuy = array();
         
-     
-           
+        $seat=$request->seat;
+
         $j = 0;
-       for ($i=1; $i <= count($customer) ; $i++) { 
+        for ($i=1; $i <= count($customer) ; $i++) { 
            # code...
             $customer[$j]->update([
                 'kursi' => $request->input('i_'.$i),
             ]);
             
             $j++;
-       }
-       return redirect('booking/'.$id.'/reservation?name='.$custom->name.'&token='.$token);
+        }
+       // return redirect('booking/'.$id.'/reservation?name='.$custom->name.'&token='.$token);
+        return redirect('booking/'.$id.'/reservation?token='.$token.'&seat='.$seat);
 
     }
     
@@ -111,35 +114,69 @@ class BookingController extends Controller
         
         return view('booking.reservation',compact('costumer','id'));
     }
-   
+
     public function storersrv(Request $request,$id)
     {       
+
         $token = $_GET['token'];
         $customer = Costumer::where('token',$token)->get();
 
         foreach($customer as $cus){
-             Reservation::create([
-                'reservation_code' => $request->reservation_code,
-                'reservation_date' => $request->reservation_date,
-                'seat_code' => $cus->kursi,
-                'depart_at' => $request->depart_at,
-                'price' => $request->price,
-                'user_id' => $request->user_id,
-                'costumer_id' => $cus->id,
-            ]);
-               
-         }
-       
-            $reservasi = Reservation::where('reservation_code', $request->reservation_code)->first();
-
-
-     return view('booking.payment',compact('reservasi'));
+         Reservation::create([
+            'reservation_code' => $token,
+            'reservation_date' => $request->reservation_date,
+            'seat_code' => $cus->kursi,
+            'depart_at' => $request->depart_at,
+            'price' => $request->price,
+            'user_id' => $request->user_id,
+            'costumer_id' => $cus->id,
+        ]);
      }
 
-       public function payment(Request $request,$id){
-        $reservation = Reservation::where('reservation_code',$request->reservation_code)->get();
 
-    return view('booking.payment',compact('reservation'));
+     $rsv_cd = $token;
+     $reservation = Reservation::where('reservation_code',$rsv_cd)->get();
+     $customer = Costumer::where('rute_id',$id)->where('token',$_GET['token'])->get();
+     $rute = Rute::where('id',$id)->first();
+     return view('booking.payment',compact('reservation','rute','customer'));
+ }
+
+ public function payment(Request $request,$id){
+    $rsv_cd = $_GET['token'];
+
+    $reservation = Reservation::where('reservation_code',$rsv_cd)->get();
+
+    $customer = Costumer::where('rute_id',$id)->where('token',$_GET['token'])->get();
+    $rute = Rute::where('id',$id)->first();
+    return view('booking.payment',compact('reservation','rute','customer'));
+}
+
+    //store Image Bro
+public function storeimg(Request $request,$id){
+    $rsv_cd = $_GET['token'];
+
+    $reservation = Reservation::where('reservation_code',$rsv_cd)->get();
+    
+    if($request->hasFile('image')){
+        $file = $request->file('image');
+        $filenames = $file->getClientOriginalName();
+        $filenames = $string = preg_replace('/\s+/', '', $filenames);
+        $extension = $file->getClientOriginalExtension();
+        $picture = date('His').$filenames;
+        $destinationPath = public_path('images/bukti/');
+        $file->move($destinationPath, $picture);
+        
+        for($i = 0; $i < count($reservation) ; $i++){
+            $reservation[$i]->update([
+                'image' => $picture,
+            ]);
+        }
+        
     }
+    return redirect('/booking/'.$id.'/reservation/payment?token='.$request->token.'&rsv_cd='.$rsv_cd);
+
+}
+
+
 
 }

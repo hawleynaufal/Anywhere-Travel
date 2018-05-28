@@ -81,15 +81,18 @@
 <![endif]-->
 @yield('css')
 </head>
-<body>
-    <div id="fh5co-wrapper">
+<body style="background-color: #e6eaed " >
+    <div id="fh5co-wrapper" style="border-bottom:1px solid #ddd;">
         <div id="fh5co-page">
 
             <header id="fh5co-header-section" class="sticky-banner">
-                <div class="container">
+                <div class="container"  >
                     <div class="nav-header" style="padding-top: 20px;padding-bottom: 20px">
-                        <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-                        <img src="{{asset('images/logo-2.png')}}" height="50px" alt="" >
+
+                        <a href="/" >
+                            <img src="{{asset('images/logo-2.png')}}" height="50px" alt="" >
+                        </a>
+                        
                         {{-- <h1 id="fh5co-logo" style="color:"><a href="{{url('/')}}" style="font-family: raleway;"><i class="icon-airplane"></i>AnyWhere Travel</a></h1> --}}
                         <!-- START #fh5co-menu-wrap -->
                         <nav id="fh5co-menu-wrap" role="navigation" style="margin: 0px!important;padding-top: -5px;">
@@ -157,7 +160,7 @@
 <!-- CS Select -->
 <script src="{{ asset('js/classie.js')}}"></script>
 <script src="{{ asset('js/selectFx.js')}}"></script>
-
+<script src="{{ asset('js/wow.js')}}"></script>
 <!-- Main JS -->
 <script src="{{ asset('js/main.js')}}"></script>
 

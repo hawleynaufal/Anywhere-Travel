@@ -47,6 +47,8 @@ Route::get('/booking/{id}/reservation','BookingController@reservation')->name('b
 Route::get('/booking/{id}/reservation/payment','BookingController@payment')->name('booking.payment');
 Route::post('/booking/{id}/reservation/payment','BookingController@storersrv')->name('booking.payment');
 
+Route::post('/booking/{id}/reservation/payment/stp2','BookingController@storeimg')->name('booking.storeimg');
+
 });
 
 
@@ -54,20 +56,21 @@ Route::middleware('admin')->group(function(){
 	Route::get('/admin','CostumerController@index')->name('costumer.index');
 	//COSTUMER
 	Route::get('/admin/costumer','CostumerController@index')->name('admin.costumer');
-	Route::get('/admin/{costumer}/edit','CostumerController@edit')->name('costumer.edit');
-	Route::patch('/admin/{costumer}/edit','CostumerController@update')->name('costumer.update');
-	Route::delete('/admin/{costumer}/delete','CostumerController@destroy')->name('costumer.destroy');
+	Route::get('/admin/costumer/{costumer}/edit','CostumerController@edit')->name('costumer.edit');
+	Route::patch('/admin/costumer/{costumer}/edit','CostumerController@update')->name('costumer.update');
+	Route::delete('/admin/costumer/{costumer}/delete','CostumerController@destroy')->name('costumer.destroy');
 
 	//RUTES
 	Route::get('/admin/rutes','CostumerController@rutetampil')->name('admin.rutetampil');
 	Route::get('/admin/rutes/create','CostumerController@rutebikin')->name('admin.rutebikin');
 	Route::post('/admin/rutes/create','CostumerController@rutesetor')->name('admin.rutesetor');
-	Route::get('/admin/{id}/edit','CostumerController@ruteedit')->name('admin.ruteedit');
-	Route::patch('/admin/{id}/edit','CostumerController@ruteupdate')->name('admin.ruteupdate');
-	Route::delete('/admin/{id}/delete','CostumerController@rutedestroy')->name('admin.rutedestroy');
+	Route::get('/admin/{rute}/edit','CostumerController@ruteedit')->name('admin.ruteedit');
+	Route::patch('/admin/{rute}/edit','CostumerController@ruteupdate')->name('admin.ruteupdate');
+	Route::delete('/admin/{rute}/delete','CostumerController@rutedestroy')->name('admin.rutedestroy');
 
 	//RESERVATION
 	Route::get('/admin/reservation', 'CostumerController@reservationtampil')->name('admin.reservation');
+	Route::post('/admin/reservation/{id}','CostumerController@reservationupdate')->name('admin.reservationupdate');
 
 	
 

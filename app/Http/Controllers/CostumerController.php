@@ -17,7 +17,7 @@ class CostumerController extends Controller
 	{
 		$search=\Request::get('search');
 
-		$costumer = Costumer::where('name','like','%'.$search.'%')->paginate(5);
+		$costumer = Costumer::where('name','like','%'.$search.'%')->paginate(10);
 
 		return view('admin.costumer',compact('costumer'));
 	}	
@@ -47,7 +47,7 @@ class CostumerController extends Controller
 	{
 
 		
-		return view('booking.edit',compact('costumer'));
+		return view('admin.edit_costumer',compact('costumer'));
 
 
 	}
@@ -77,7 +77,7 @@ class CostumerController extends Controller
 	{
 		$search=\Request::get('search');
 
-		$rute = Rute::paginate(5);
+		$rute = Rute::paginate(10);
 		return view('admin.rutes',compact('rute'));
 	}
     public function rutebikin()
@@ -102,7 +102,7 @@ class CostumerController extends Controller
 	{
 		$rute = Rute::findOrFail($id);
 
-		return view('booking.edit',compact('rute'));
+		return view('admin.edit',compact('rute'));
 
 
 	}
@@ -123,7 +123,7 @@ class CostumerController extends Controller
 
 	public function rutedestroy(Rute $rute)
 	{
-
+		dd($rute);
 		$rute->delete();
 
 		return redirect()->route('admin.rutetampil');
@@ -133,7 +133,16 @@ class CostumerController extends Controller
 	public function reservationtampil()
 	{
 
-		$reservation = Reservation::paginate(5);
+		$reservation = Reservation::paginate(10);
 		return view('admin.reservation',compact('reservation'));
+	}
+	public function reservationupdate(Request $request,$id)
+	{
+		$reservation = Reservation::findOrFail($id);
+		$reservation->update([
+			'status' => '1',
+		]);
+
+		return redirect()->route('admin.reservation');
 	}
 }

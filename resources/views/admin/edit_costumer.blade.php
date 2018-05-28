@@ -154,22 +154,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header ">
       <h1 style="display: inline-block;">
-        Reservation
-        <small> {{$reservation->count('id')}} </small>
+        Create Rute
+        <small> </small>
       </h1>
-      <a href="{{url('/admin/rutes/create')}}">
-        <button class="btn btn-primary" style="float: right;">Create Rutes</button>
-      </a>
-      <form action="{{ route('admin.rutetampil') }}" class="form-inline" style="display: inline-block;float: right; padding-right: 40px;" method="get" >                
-        <div class="form-group">
-          <input type="text" class="form-control" name="search" value="">
-        </div>
-        <div class="form-group">
-          <button class="btn btn-primary" type="submit">
-            <span class="fa fa-search"></span>
-          </button>
-        </div>
-      </form>
+      
     </section>
 
     <!-- Main content -->
@@ -184,60 +172,72 @@
             <div class="box">
               <!-- /.box-header -->
               <div class="box-body">
-                <table class="table table-bordered">
-                  <tr>
-                    <th style="width: 10px">No</th>
-                    <th>Reservation Code</th>
-                    
-                    <th>Reservation Date</th>
-                    <th>Seat Code</th>
-                    <th>Depart At</th>
-                    <th>Price</th>
-                    <th>Costumer Id</th>
-                    <th>Rute Id</th>
-                    <th>Bukti</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                <form action="" method="post">
+                  {{ csrf_field() }}
 
-                  </tr>
-                  <?php $no=1; ?>
-                  @foreach($reservation as $reservations)
-                  <tr>
-                    <td>{{$no++}}</td>
-                    <td>{{$reservations->reservation_code}}</td>
-                    
-                    <td>{{$reservations->reservation_date}}</td>
-                    <td>{{$reservations->seat_code}}</td>
-                    <td>{{$reservations->depart_at}}</td>
-                    <td>Rp. {{$reservations->price}}</td>
-                    <td>{{$reservations->costumer_id}}</td>
-                    <td>{{$reservations->costumer->rute_id}}</td>
-                    <td>{{str_limit($reservations->image,8)}}</td>
-                    <td>
-                      @if ($reservations->status == 0)
-                        Pending
-                      @else
-                      Lunas
-                      @endif
-                    </td>
-                    <td>
-                      @if ($reservations->status == 0)
-                        <form action="{{ request()->url()  }}/{{$reservations->id}}" method="post">
-                          <input type="hidden" value="1" name="status">
-                          {{ csrf_field() }}
-                        <button class="btn btn-primary" type="submit" >Konfimasi</button>
-                      </form>
-                      
-                      
-                      @endif
-                    </td>
-                    
-                  </tr>
-                  @endforeach
-                </table>
+                  <div class="form-group">
+                    <label >Nama :</label><br>
+                    <input type="text" class="form-control"
+                    name="name" value="{{$costumer->name}}" placeholder="Masukan harga.." />
+                  </div>
+
+                  <div class="form-group">
+                    <label >Address :</label><br>
+                    <input type="text" class="form-control"
+                    name="address" value="{{$costumer->address}}" placeholder="Masukan harga.." />
+                  </div>
+
+                  <div class="form-group">
+                    <label >Phone :</label><br>
+                    <input type="text" class="form-control"
+                    name="name" value="{{$costumer->phone}}" placeholder="Masukan harga.." />
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="from">To:</label><br>
+                    <select name="rute_to" id="" class="cs-select cs-skin-border" >
+                      <option value="" disabled selected>Rute to</option>
+                      <option value="Denpasar">   Denpasar</option>
+                      <option value="Jakarta">Jakarta</option>
+                      <option value="Bandung">Bandung</option>
+                      <option value="Jayapura">Jayapura</option>
+                      <option value="Pontianak">Pontianak</option>
+                      <option value="Palembang">Palembang</option>
+                      <option value="Makasar">Makasar</option>
+
+                    </select>
+                  </div>
+
+
+
+                  <div class="form-group">
+                    <label for="date-start">Depart:</label><br>
+                    <input type="text" class="form-control" id="date-start" data-date-format="yyyy-mm-dd" data-date-start-date="+1d"
+                    placeholder="yyyy-mm-dd"
+                    name="depart_at" />
+                  </div>
+
+                  <div class="form-group">
+                    <label >Price:</label><br>
+                    <input type="text" class="form-control"
+                    name="price" placeholder="Masukan harga.." />
+                  </div>
+
+                  
+
+
+                  <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-block mt" value="Save">
+                  </div>
+
+
+
+
+                </form>
               </div>
               <div class="box-footer clearfix " style="border-top:0px;text-align: center;"> 
-               {{$reservation->links()}}
+                
              </div>
            </div>
          </div>
@@ -281,7 +281,7 @@
 <script src="{{ asset('bower_components/moment/min/moment.min.js') }}"></script>
 <script src="{{ asset('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 <!-- datepicker -->
-<script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap-datepicker.min.js')}}"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <!-- Slimscroll -->
